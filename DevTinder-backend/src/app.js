@@ -6,6 +6,10 @@ app.use('/test', (req, res) => {
     res.send('Hello from the test server');
 });
 
+app.use('/hello/2', (req, res) => {
+    res.send('Abracadabra!');
+});
+
 app.use('/hello', (req, res) => {
     res.send('Hello Hello Hello!');
 });
@@ -15,7 +19,7 @@ app.use('/dashboard', (req, res) => {
 });
 
 app.use('/', (req, res) => {
-    res.send('Hello from root server');
+    res.send('Namaste Kireeti');
 });
 
 
