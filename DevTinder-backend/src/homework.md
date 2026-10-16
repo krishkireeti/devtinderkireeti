@@ -7,3 +7,8 @@
 - You have to make or write request handlers for /test, /hello
 - Install nodemon and update scripts inside package.json
 - Difference between caret and tilde (^ vs ~)
+
+- initialize git
+- gitignore
+- Create a remote repo on github
+- Push all code to remote origin
