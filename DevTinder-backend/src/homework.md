@@ -15,3 +15,11 @@
 - Play with routes and route extensions
 - Install Postman app and make a workspace/collection -> test API call
 - Write logic to handle GET, POST, PATCH, DELETE API calls and test them on postman
+
+- Multiple Route Handlers - Play with the code
+- next()
+- next function and errors along with res.send()
+- app.use("/route", rH, [rH2, rH3], rH4);
+- What is a Middleware 
+- How Express JS basically handles requests behind the scenes
+- Difference between app.use and app.all
