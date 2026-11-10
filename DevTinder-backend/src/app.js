@@ -1,33 +1,34 @@
 const express = require('express');
-
+const connectDB = require("./config/database");
 const app = express();
+const User = require('./models/user');
 
-app.use("/", (err, req, res, next) => {
-    if (err) {
-        // Log your error message
-        res.status(500).send("Something went wrong");
+
+// Since it returns a promise, we use async and await
+app.post("/signup", async (req, res) => {
+    const userObj = {
+        firstName: "Sachin",
+        lastName: "Tendulkar",
+        emailId: "sachin@tendulkar.com",
+        password: "sachin@123"
     }
-});
+    // Creating a new instance of the User model
+    const user = new User(userObj);
 
-app.get("/getuserData", (req, res) => {
-
-    // Logic of DB call and get user data
-    throw new Error("dvbhicf");
-    res.send("User Data sent");
-    /* try {
-       
-    } */
-    /* catch (err) {
-        res.status(500).send("Some Error contact support team");
-    } */
-});
-
-app.use("/", (err, req, res, next) => {
-    if (err) {
-        // Log your error message
-        res.status(500).send("Something went wrong");
+    try {
+        await user.save();
+        res.send("User Added Successfully");
     }
-});
+    catch (err) {
+        res.status(400).send('Error saving the user: ' + err.message);
+    }
+})
+
+connectDB().then(() => {
+    console.log("Database connection established...");
+}).catch(err => {
+    console.error("Database cannot be connected!!");
+})
 
 app.listen(7777, () => {
     console.log('Server is successfully listening on port 7777');
