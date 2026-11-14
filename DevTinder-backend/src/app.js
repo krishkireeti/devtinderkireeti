@@ -23,9 +23,11 @@ app.post("/signup", async (req, res) => {
 // Get user by email
 app.get("/user", async (req, res) => {
     const userEmail = req.body.emailId;
+    // const userId = req.body.userId;
 
     try {
         const user = await User.findOne({ emailId: userEmail });
+        // const user = await User.findById(userId);
         if (!user) {
             res.status(404).send("User not found");
         }
