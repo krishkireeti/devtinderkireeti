@@ -2,20 +2,38 @@ const express = require('express');
 const connectDB = require("./config/database");
 const app = express();
 const User = require('./models/user');
+const { validateSignUpData } = require('./utils/validation');
+const bcrypt = require("bcrypt");
+const validator = require("validator");
 
 app.use(express.json());
 
 // Since it returns a promise, we use async and await
 app.post("/signup", async (req, res) => {
-    // Creating a new instance of the User model
-    const user = new User(req.body);
-
     try {
+        // Validation of data
+        validateSignUpData(req);
+
+        const { firstName, lastName, emailId, password } = req.body;
+
+        // Encrypt the password
+        // Since it will return a promise, await has been added
+        const passwordHash = await bcrypt.hash(password, 10);
+        console.log(passwordHash);
+
+        // Creating a new instance of the User model
+        const user = new User({
+            firstName,
+            lastName,
+            emailId,
+            password: passwordHash
+        });
+
         await user.save();
         res.send("User Added Successfully");
     }
     catch (err) {
-        res.status(400).send('Error saving the user: ' + err.message);
+        res.status(400).send('ERROR : ' + err.message);
     }
 
 });
