@@ -105,3 +105,4 @@
 - Thought process - POST vs GET
 - Read about ref and populate
 - Create GET /user/requests/received
+- Create GET /user/connections
